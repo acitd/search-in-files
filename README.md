@@ -22,7 +22,7 @@ python3
 ```
 
 ## Usage
-Open in treminal
+Open from treminal
 ```bash
 search-in-files
 ```
