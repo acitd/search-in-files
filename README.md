@@ -28,15 +28,19 @@ sudo bin/uninstall.sh
 ```
 
 ## Usage
-To start using it type to the terminal:
+Open in treminal
 ```bash
 search-in-files
 ```
-If you want to search directly to a specific directory you can do it like this:
+Search in current directory
 ```bash
-search-in-files -d /home/user/Downloads -t "hello world"
+search-in-files "hello world"
 ```
-If you want to open the found files with your editor
+Search in another directory
 ```bash
-search-in-files -d /home/user/Downloads -t "hello world" -o "vim {file}:{line}"
+search-in-files "hello world" -d "/home/user/Downloads"
+```
+Open the found files with your favorite text editor on double-click
+```bash
+search-in-files "hello world" -d "/home/user/Downloads" -o "vim {file}:{line}"
 ```
