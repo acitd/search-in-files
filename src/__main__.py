@@ -232,8 +232,8 @@ class FileSearchWindow(Gtk.Window):
 # ---- Argument Parser ----
 def main():
 	parser = argparse.ArgumentParser(description='GTK File Search Tool')
-	parser.add_argument('-d', '--directory', help='Directory to search in')
-	parser.add_argument('-t', '--text', help='Text to search for')
+	parser.add_argument('text', nargs='?', default=None, help='Text to search for')
+	parser.add_argument('-d', '--directory', default=os.getcwd(), help='Directory to search in')
 	parser.add_argument('-o', '--open', help="Command to open the file (e.g. 'vim {file}:{line}')")
 	args = parser.parse_args()
 
@@ -244,4 +244,3 @@ def main():
 
 if __name__ == '__main__':
 	main()
-
