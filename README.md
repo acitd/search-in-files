@@ -38,5 +38,5 @@ search-in-files -d /home/user/Downloads -t "hello world"
 ```
 If you want to open the found files with your editor
 ```bash
-search-in-files -d /home/user/Downloads -t "hello world" -o 'vim {file}:{line}'
+search-in-files -d /home/user/Downloads -t "hello world" -o "vim {file}:{line}"
 ```
