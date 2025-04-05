@@ -1,30 +1,24 @@
 # Search in Files (search-in-files)
 A simple tool to search text inside files.
 
-# Setup
-Go to project directory and run the following commands.
-### Depndencies
+## Install / Uninstall
+Go to the project's root directory and run the following commands
+```bash
+# Install to current user
+bin/install.sh
+
+# Ininstall from current user
+bin/uninstall.sh
+
+# Install globally
+sudo bin/install.sh
+
+# Ininstall globally
+sudo bin/uninstall.sh
+```
+#### Depndencies
 ```bash
 python3
-```
-
-### Install
-Install as to current user.
-```bash
-bin/install.sh
-```
-Install globally.
-```bash
-sudo bin/install.sh
-```
-### Uninstall
-Install as to current user.
-```bash
-bin/uninstall.sh
-```
-Install globally.
-```bash
-sudo bin/uninstall.sh
 ```
 
 ## Usage
