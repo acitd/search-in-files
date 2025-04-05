@@ -7,13 +7,13 @@ Go to the project's root directory and run the following commands
 # Install to current user
 bin/install.sh
 
-# Ininstall from current user
+# Uninstall from current user
 bin/uninstall.sh
 
 # Install globally
 sudo bin/install.sh
 
-# Ininstall globally
+# Uninstall globally
 sudo bin/uninstall.sh
 ```
 #### Depndencies
