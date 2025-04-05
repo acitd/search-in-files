@@ -3,12 +3,12 @@ A simple tool to search text inside files.
 
 # Setup
 Go to project directory and run the following commands.
-## depndencies
+### Depndencies
 ```bash
 python3
 ```
 
-## Install
+### Install
 Install as to current user.
 ```bash
 bin/install.sh
@@ -17,7 +17,7 @@ Install globally.
 ```bash
 sudo bin/install.sh
 ```
-## Uninstall
+### Uninstall
 Install as to current user.
 ```bash
 bin/uninstall.sh
