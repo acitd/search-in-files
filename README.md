@@ -1,2 +1,2 @@
 # search-in-files
-A simple tools to search text inside files
+A simple tool to search text inside files
