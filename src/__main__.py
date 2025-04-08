@@ -48,6 +48,7 @@ class FileSearchWindow(Gtk.Window):
 		#self.search_entry.connect('changed', self.on_text_changed)  # Listen for directory changes
 		self.search_entry.connect('activate', self.on_search)
 		top_box.pack_start(self.search_entry, True, True, 0)
+		self.search_entry.grab_focus()
 
 		#self.search_button = Gtk.Button(label='Search')
 		#self.search_button.connect('clicked', self.on_search)
@@ -91,6 +92,7 @@ class FileSearchWindow(Gtk.Window):
 			self.dir_entry.set_text(initial_dir)
 		if initial_text:
 			self.search_entry.set_text(initial_text)
+			self.search_entry.select_region(0,-1)
 			self.on_search()  # Auto-search on load if both are set
 
 		# Connect window destroy event to handle app termination
