@@ -170,7 +170,7 @@ class FileSearchWindow(Gtk.Window):
 				except Exception as e:
 					print(f'Error reading {full_path}: {e}')
 
-				time.sleep(0.1)  # Tiny sleep to reduce CPU usage
+				time.sleep(0.01)  # Tiny sleep to reduce CPU usage
 
 		GLib.idle_add(self.search_completed, result_count)
 
