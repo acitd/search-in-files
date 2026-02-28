@@ -16,7 +16,7 @@ sudo bin/install.sh
 # Uninstall globally
 sudo bin/uninstall.sh
 ```
-#### Depndencies
+#### Dependencies
 ```bash
 python3
 ```
