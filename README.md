@@ -28,7 +28,7 @@ search-in-files
 ```
 Search in current directory
 ```bash
-search-in-files "hello world"
+search-in-files -t "hello world"
 ```
 Search in another directory
 ```bash
