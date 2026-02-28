@@ -59,7 +59,7 @@ class FileSearchWindow(Gtk.Window):
 		self.search_entry.connect('activate',self.on_search)
 		top_box.pack_start(self.search_entry,True,True,0)
 		self.search_entry.grab_focus()
-		self.store=Gtk.ListStore(str,str,str)  # File,Line,Content
+		self.store=Gtk.ListStore(str,str,str)
 		self.treeview=Gtk.TreeView(model=self.store)
 		for i,title in enumerate(['File','Line','Content']):
 			renderer=Gtk.CellRendererText()
