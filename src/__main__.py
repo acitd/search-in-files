@@ -11,7 +11,7 @@ from gi.repository import Gtk,GLib
 MAX_MB=1
 EXCLUDED_EXTS={
 	'.7z','.zip','.rar','.tar','.gz','.xz','.bz2','.lz','.lzma','.zst',
-	'.jpg','.jpeg','.png','.gif','.bmp','.webp',
+	'.jpg','.jpeg','.png','.gif','.bmp','.webp','psd',
 	'.svg','.ico','.tiff','.tif','.heic','.heif','.avif',
 	'.mp4','.avi','.mkv','.mov','.wmv','.flv','.webm','.m4v','.3gp',
 	'.mp3','.wav','.flac','.aac','.ogg','.m4a','.wma',
@@ -224,10 +224,10 @@ class FileSearchWindow(Gtk.Window):
 		self.stop_current_search()
 		Gtk.main_quit()
 def main():
-	parser=argparse.ArgumentParser(description='GTK File Search Tool')
-	parser.add_argument('text',nargs='?',default=None,help='Text to search for')
-	parser.add_argument('-d','--directory',default=os.getcwd(),help='Directory to search in')
-	parser.add_argument('-o','--open',help="Command to open the file (e.g. 'vim +{line} {path}')")
+	parser=argparse.ArgumentParser(description='GTK File Search Tool.')
+	parser.add_argument('-t','--text',default=None,help='Text to search for.')
+	parser.add_argument('-d','--directory',default=os.getcwd(),help='Directory to search in.')
+	parser.add_argument('-o','--open',help="Command to open the file (e.g. 'vim +{line} {path}').")
 	args=parser.parse_args()
 	win=FileSearchWindow(initial_dir=args.directory,initial_text=args.text,open_command=args.open)
 	win.show_all()
