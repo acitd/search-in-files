@@ -36,5 +36,5 @@ search-in-files -t "hello world" -d "/home/user/Downloads"
 ```
 Open the found files with your favorite text editor on double-click
 ```bash
-search-in-files -t "hello world" -d "/home/user/Downloads" -o "vim {file}:{line}"
+search-in-files -t "hello world" -d "/home/user/Downloads" -o "vim '{file}':{line}"
 ```
