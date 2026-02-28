@@ -41,7 +41,7 @@ class FileSearchWindow(Gtk.Window):
 		self.result_queue=Queue()
 		self._ui_timer_id=None
 		self._last_status_update=0.0
-		self._status_path=""
+		self._status_path=''
 		self._result_count=0
 		main_vbox=Gtk.Box(orientation=Gtk.Orientation.VERTICAL,spacing=6)
 		self.add(main_vbox)
@@ -66,10 +66,10 @@ class FileSearchWindow(Gtk.Window):
 			column=Gtk.TreeViewColumn(title,renderer,text=i)
 			column.set_resizable(True)
 			column.set_min_width(100)
-			if i == 0:
+			if i==0:
 				column.set_fixed_width(200)
 				column.set_expand(False)
-			if i == 1:
+			if i==1:
 				column.set_resizable(False)
 			self.treeview.append_column(column)
 		self.treeview.connect('row-activated',self.on_row_activated)
@@ -94,7 +94,7 @@ class FileSearchWindow(Gtk.Window):
 			buttons=(Gtk.STOCK_CANCEL,Gtk.ResponseType.CANCEL,Gtk.STOCK_OPEN,Gtk.ResponseType.OK)
 		)
 		response=dialog.run()
-		if response == Gtk.ResponseType.OK:
+		if response==Gtk.ResponseType.OK:
 			directory=dialog.get_filename()
 			self.dir_entry.set_text(directory)
 		dialog.destroy()
@@ -126,32 +126,32 @@ class FileSearchWindow(Gtk.Window):
 		except Exception:
 			pass
 	def search_files_worker(self,directory,search_text):
-		needle=search_text.encode("utf-8",errors="ignore")
+		needle=search_text.encode('utf-8',errors='ignore')
 		for absolute_path,entry in iter_files_scandir(directory,self.stop_event):
 			if self.stop_event.is_set():
 				break
 			now=time.monotonic()
-			if now - self._last_status_update > 0.2:
+			if now - self._last_status_update>0.2:
 				self._last_status_update=now
 				self._status_path=absolute_path
 			try:
 				st=entry.stat(follow_symlinks=False)
-				if st.st_size > self.max_file_size:
+				if st.st_size>self.max_file_size:
 					continue
 			except OSError:
 				continue
 			try:
-				with open(absolute_path,"rb") as f:
+				with open(absolute_path,'rb') as f:
 					for i,line in enumerate(f,1):
 						if self.stop_event.is_set():
 							break
 						if needle in line:
-							text=line.decode("utf-8",errors="replace").strip()
+							text=line.decode('utf-8',errors='replace').strip()
 							relpath=os.path.relpath(absolute_path,directory)
 							self.result_queue.put((relpath,str(i),text))
 			except (OSError,IOError):
 				continue
-		self.result_queue.put(("__DONE__",directory,""))
+		self.result_queue.put(('__DONE__',directory,''))
 	def update_results_from_queue(self):
 		if self._status_path:
 			self.status_bar.push(0,f'Processing file: {self._status_path}')
@@ -163,27 +163,27 @@ class FileSearchWindow(Gtk.Window):
 				relpath,line_no,text=self.result_queue.get_nowait()
 			except Empty:
 				break
-			if relpath == "__DONE__":
+			if relpath=='__DONE__':
 				done=True
 				break
-			if len(text) > 160:
-				text=text[:160] + "..."
+			if len(text)>160:
+				text=text[:160]+'...'
 			self.store.append([relpath,line_no,text])
-			self._result_count += 1
-			batch += 1
+			self._result_count+=1
+			batch+=1
 		if done:
 			while True:
 				try:
 					relpath,line_no,text=self.result_queue.get_nowait()
 				except Empty:
 					break
-				if relpath == "__DONE__":
+				if relpath=='__DONE__':
 					continue
-				if len(text) > 160:
-					text=text[:160] + "..."
+				if len(text)>160:
+					text=text[:160]+'...'
 				self.store.append([relpath,line_no,text])
-				self._result_count += 1
-			if self._result_count == 0:
+				self._result_count+=1
+			if self._result_count==0:
 				self.status_bar.push(0,'No results found.')
 			else:
 				self.status_bar.push(0,f'Search complete: {self._result_count} results found.')
@@ -214,5 +214,5 @@ def main():
 	win=FileSearchWindow(initial_dir=args.directory,initial_text=args.text,open_command=args.open)
 	win.show_all()
 	Gtk.main()
-if __name__ == '__main__':
+if __name__=='__main__':
 	main()
