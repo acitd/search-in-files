@@ -8,6 +8,21 @@ import time
 from queue import Queue,Empty
 gi.require_version('Gtk','3.0')
 from gi.repository import Gtk,GLib
+MAX_MB=1
+EXCLUDED_EXTS={
+	'.7z','.zip','.rar','.tar','.gz','.xz','.bz2','.lz','.lzma','.zst',
+	'.jpg','.jpeg','.png','.gif','.bmp','.webp',
+	'.svg','.ico','.tiff','.tif','.heic','.heif','.avif',
+	'.mp4','.avi','.mkv','.mov','.wmv','.flv','.webm','.m4v','.3gp',
+	'.mp3','.wav','.flac','.aac','.ogg','.m4a','.wma',
+	'.pdf','.doc','.docx','.xls','.xlsx','.ppt','.pptx',
+	'.odt','.ods','.odp','.rtf','.epub',
+	'.exe','.dll','.so','.bin','.msi','.dmg','.apk','.app',
+	'.iso','.img','.vhd','.vmdk',
+	'.ttf','.otf','.woff','.woff2',
+	'.db','.sqlite','.sqlite3','.mdb',
+	'.deb','.rpm','.pkg'
+}
 def iter_files_scandir(root_dir,stop_event: threading.Event):
 	stack=[root_dir]
 	while stack and not stop_event.is_set():
@@ -27,7 +42,7 @@ def iter_files_scandir(root_dir,stop_event: threading.Event):
 		except OSError:
 			continue
 class FileSearchWindow(Gtk.Window):
-	def __init__(self,initial_dir=None,initial_text=None,open_command=None,max_file_size=2*1024*1024):
+	def __init__(self,initial_dir=None,initial_text=None,open_command=None):
 		super().__init__(title='Search in Files')
 		self.set_default_size(800,500)
 		try:
@@ -35,7 +50,7 @@ class FileSearchWindow(Gtk.Window):
 		except Exception:
 			pass
 		self.open_command=open_command
-		self.max_file_size=max_file_size
+		self.max_file_size=MAX_MB*1024*1024
 		self.search_thread=None
 		self.stop_event=threading.Event()
 		self.result_queue=Queue()
@@ -130,6 +145,9 @@ class FileSearchWindow(Gtk.Window):
 		for absolute_path,entry in iter_files_scandir(directory,self.stop_event):
 			if self.stop_event.is_set():
 				break
+			_,ext=os.path.splitext(entry.name)
+			if ext.lower() in EXCLUDED_EXTS:
+				continue
 			now=time.monotonic()
 			if now - self._last_status_update>0.2:
 				self._last_status_update=now
